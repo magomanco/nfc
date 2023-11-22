@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grava NFC</title>
+</head>
+<body>
+    <h1>Grava NFC</h1>
+
+    <form id="userForm">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+
+        <label for="sobrenome">Sobrenome:</label>
+        <input type="text" id="sobrenome" name="sobrenome" required>
+
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" name="endereco" required>
+
+        <label for="telefone">Telefone:</label>
+        <input type="tel" id="telefone" name="telefone" required>
+
+        <label for="profissao">Profissão:</label>
+        <input type="text" id="profissao" name="profissao" required>
+
+        <button type="button" onclick="writeNFC()">Gravar NFC</button>
+    </form>
+
+    <script>
+        async function writeNFC() {
+            const form = document.getElementById('userForm');
+            const formData = new FormData(form);
+
+            try {
+                const writer = new NDEFWriter();
+                await writer.write(formData);
+                alert('Dados gravados!');
+            } catch (error) {
+                console.error('Erro com a gravação:', error);
+                alert('Erro ao gravar NFC. Algum B.O. tem ai.');
+            }
+        }
+    </script>
+</body>
+</html>
